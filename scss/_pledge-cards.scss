@@ -1,0 +1,70 @@
+/* PLEDGE CARD */
+.pledge-card {
+	border: 1px solid $darkGrey;
+	border-radius: $border-radius--small;
+	margin-bottom: 3rem;
+	position: relative;
+}
+
+.pledge-card--selected {
+	border-color: $lightCyan;
+}
+
+.pledge-card input[type="radio"]:checked {
+	border-color: $darkCyan;
+}
+
+.pledge-card__container {
+	padding: 30px 20px;
+}
+
+.pledge-card__title {
+	margin-bottom: 2.5rem;
+}
+
+.pledge-card:first-of-type {
+	margin-top: 3rem;
+}
+
+.pledge-card__price {
+	display: flex;
+	flex-direction: column;
+	grid-area: pledge-price;
+}
+
+p.pledge-card__paragraph {
+	grid-area: pledge-paragraph;
+	margin: 2.5rem 0;
+}
+
+.pledge-price:not(:last-child) {
+	margin-bottom: 30px;
+}
+
+.pledge-card__overlay {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: $border-radius--small;
+	z-index: 300;
+}
+
+@media screen and (min-width: 768px) {
+	.pledge-card__price {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.pledge-card__title {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.pledge-card__price {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}

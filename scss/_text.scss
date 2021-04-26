@@ -1,0 +1,16 @@
+.text {
+	color: #000;
+	font-weight: 700;
+
+	&--bold {
+		font-size: 2rem;
+	}
+
+	&--large {
+		font-size: 3.5rem;
+	}
+
+	&--small {
+		margin-left: 0.5rem;
+	}
+}

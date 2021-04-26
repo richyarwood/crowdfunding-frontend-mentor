@@ -1,0 +1,159 @@
+.header {
+	background: url("../images/image-hero-mobile.jpg") no-repeat center center;
+	background-size: cover;
+	height: 300px;
+	width: 100%;
+	padding: 20px 0;
+}
+
+.navigation {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+}
+
+.section {
+	background-color: #fff;
+	border-radius: $border-radius--small;
+	padding: 4rem;
+	border: 1px solid $borderColor;
+	margin: 20px 0;
+	display: flex;
+	flex-direction: column;
+
+	&__hero {
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	&__element:not(:last-of-type) {
+		border-bottom: 2px solid $lightGrey;
+		padding-bottom: 2rem;
+	}
+
+	&__element:not(:first-of-type) {
+		padding-top: 2rem;
+	}
+
+	&__modal {
+		background-color: #fff;
+		padding: 40px 30px;
+		margin: auto;
+		border-radius: $border-radius--small;
+	}
+
+	&--center-aligned {
+		align-items: center;
+		text-align: center;
+	}
+
+	&--negative-margin {
+		margin-top: -60px;
+	}
+}
+
+.hamburger {
+	width: 20px;
+	height: 20px;
+}
+
+.highlighted-text {
+	color: $lightCyan;
+}
+
+.button {
+	background-color: $lightCyan;
+	color: #fff;
+	padding: 18px 30px;
+	border-radius: $border-radius--large;
+	border: 0;
+	font-size: 1.5rem;
+	width: max-content;
+	margin-top: 2rem;
+
+	&:hover {
+		background-color: $darkCyan;
+	}
+
+	&--disabled {
+		background-color: $darkGrey;
+	}
+
+	&--narrow {
+		margin: 0;
+		padding: 10px 20px;
+	}
+}
+
+.button-cluster {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 2rem;
+}
+
+.progress-bar-outer,
+.progress-bar-inner {
+	border-radius: $border-radius--small;
+	height: 1rem;
+}
+
+.progress-bar-outer {
+	width: 100%;
+	background-color: $lightGrey;
+	margin-top: 3rem;
+	height: 1.5rem;
+}
+.progress-bar-inner {
+	height: 1.5rem;
+	width: 80%;
+	background-color: $lightCyan;
+}
+
+.brand-logo {
+	margin-bottom: 2rem;
+	margin-top: -6rem;
+}
+
+@include tablet-up {
+	header {
+		background: url("../images/image-hero-desktop.jpg") no-repeat center center;
+		background-size: cover;
+		height: 400px;
+		width: 100%;
+	}
+
+	.container {
+		max-width: 900px;
+	}
+
+	button {
+		margin-top: 0;
+	}
+
+	.section {
+		&__hero {
+			margin: 0;
+			display: flex;
+			flex-direction: row;
+			text-align: left;
+			align-items: center;
+		}
+
+		&__element {
+			flex-basis: 33%;
+		}
+
+		&__element:not(:last-of-type) {
+			padding: 0;
+			border-bottom: none;
+		}
+
+		&__element:not(:first-of-type) {
+			border-left: 2px solid $lightGrey;
+			padding: 0;
+			padding-left: 60px;
+		}
+	}
+}
