@@ -1,16 +1,16 @@
 .text {
 	color: #000;
-	font-weight: 700;
+
+	&--medium-weight {
+		font-weight: 500;
+	}
 
 	&--bold {
-		font-size: 2rem;
+		font-weight: 700;
 	}
 
 	&--large {
 		font-size: 3.5rem;
-	}
-
-	&--small {
-		margin-left: 0.5rem;
+		font-weight: 700;
 	}
 }
