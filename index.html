@@ -14,27 +14,64 @@
 			href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;700&display=swap"
 			rel="stylesheet"
 		/>
-		<script src="app.js"></script>
+		<script type="module" src="/js/index.js"></script>
 		<link rel="stylesheet" href="/css/index.min.css" />
 
 		<title>Frontend Mentor | Crowdfunding product page</title>
 	</head>
 	<body>
-		<div class="modal-background"></div>
+		<div class="overlay"></div>
 		<div class="content-wrapper">
 			<header class="header">
-				<nav class="container navigation">
-					<img src="/images/logo.svg" alt="Crowdfund" />
+				<div class="header__content">
+					<img class="header__logo" src="/images/logo.svg" alt="Crowdfund" />
+				<nav class="navigation" aria-label="Frontend Mentor Crowdfunding">
+					<button
+						aria-expanded="false"
+						aria-controls="main-navigation"
+						class="navigation__hamburger"
+					>
 					<img
 						src="/images/icon-hamburger.svg"
 						alt=""
 						role="button"
-						class="hamburger"
 					/>
+					</button>
+					<ul
+						class="navigation__items"
+						id="main-navigation"
+						role="menubar"
+						aria-label="Frontend Mentor Crowdfunding">
+						<li class="navigation__list-item" role="none">
+							<a
+							class="navigation__menu-item text--medium-weight"
+							href="#"
+							role="menuitem">
+							About
+						</a>
+						</li>
+						<li class="navigation__list-item" role="none">
+							<a
+							class="navigation__menu-item text--medium-weight"
+							href="#"
+							role="menuitem">
+							Discover
+						</a>
+						</li>
+						<li class="navigation__list-item" role="none">
+							<a
+							class="navigation__menu-item text--medium-weight"
+							href="#"
+							role="menuitem">
+							Get Started
+						</a>
+						</li>
+					</ul>
 				</nav>
+				</div>
 			</header>
 			<main class="container">
-				<section class="section section--center-aligned section--negative-margin">
+				<section class="section section__head section--center-aligned section--negative-margin">
 					<div class="brand-logo">
 						<img src="images/logo-mastercraft.svg" />
 					</div>
@@ -51,11 +88,11 @@
 				<section class="section">
 					<div class="section__hero">
 							<div class="section__element">
-								<div class="text text--large">$89,914</div>
-								<p>of $100,000 backed</p>
+								<div class="text text--large">$<span id="pledge-total">0</span></div>
+								<p>of $<span id="pledge-target-amount"></span> backed</p>
 							</div>
 							<div class="section__element">
-								<div class="text text--large">5,007</div>
+								<div class="text text--large" id="backers-total">0</div>
 							<p>total backers</p>
 							</div>
 							<div class="section__element">
@@ -93,10 +130,29 @@
 								special Backer member list.
 							</p>
 							<div class="pledge-card__price">
-								<div class="pledge-card__left">
-									<span class="text text--large">101</span><span class="text--small">left</span>
+								<div>
+									<span class="text text--large">101</span><span class="pledge-card__left-span">left</span>
 								</div>
-								<button class="button">Select Reward</button>
+								<button class="button button__select-reward" id="select-bamboo-stand">Select Reward</button>
+							</div>
+						</div>
+					</div>
+					<div class="pledge-card">
+						<div class="pledge-card__container">
+							<div class="pledge-card__title">
+								<h3>Black Edition Stand</h3>
+								<p class="highlighted-text">Pledge $25 or more</p>
+							</div>
+							<p class="pledge-card__paragraph">
+								You get an ergonomic stand made of natural bamboo. You've helped
+								us launch our promotional campaign, and you’ll be added to a
+								special Backer member list.
+							</p>
+							<div class="pledge-card__price">
+								<div>
+									<span class="text text--large">101</span><span class="pledge-card__left-span">left</span>
+								</div>
+								<button class="button button__select-reward" id="black-edition-stand">Select Reward</button>
 							</div>
 						</div>
 					</div>
@@ -105,30 +161,30 @@
 		</div>
 		<!-- PLEDGE MODAL  -->
 		<div
-			class="modal-wrapper"
+			class="modal__wrapper"
 			role="	"
 			aria-labelledby="modalTitle"
 			aria-modal="true"
 		>
-			<div class="section section__modal container">
-				<div class="modal-header">
+			<section class="section modal__pledge-section container">
+				<div class="modal__header">
 					<h2 id="modalTitle">Back this project</h2>
 					<img
 						src="/images/icon-close-modal.svg"
 						alt="Close pledge modal"
-						class="modal-close-icon"
+						class="modal__close-icon"
 						role="button"
 					/>
 				</div>
-				<div class="pledge-card">
-					<div class="pledge-card__container modal-pledge-card-container">
-						<div class="modal-pledge-select">
-							<input type="radio" id="bamboo-stand" name="pledges" />
-							<label for="bamboo-stand">
+				<div class="pledge-card modal-pledge-card">
+					<div class="pledge-card__container modal-pledge-card__container">
+						<div class="modal-pledge-card__select">
+							<input type="radio" id="pledge-bamboo-stand" name="pledges" />
+							<label class="modal-pledge-card__select-label" for="pledge-bamboo-stand">
 								<h3>Bamboo Stand</h3>
 								<div class="highlighted-text">Pledge $25 or more</div>
 							</label>
-							<div class="modal-pledge-check"></div>
+							<div class="modal-pledge-card__check"></div>
 						</div>
 						<p class="pledge-card__paragraph">
 							You get an ergonomic stand made of natural bamboo. You've helped
@@ -137,24 +193,66 @@
 						</p>
 						<div class="pledge-card__price">
 							<div class="pledge-card__left">
-								<span class="text text--bold">101</span><span>left</span>
-							</div>
-						</div>
-						<div class="modal-pledge-card-entry">
-							<p>Enter your pledge</p>
-							<form action="" method="post">
-								<div class="modal-pledge-card-entry__input-cluster">
-									<div class="modal-pledge-card-entry__input">
-										<label class="modal-pledge-card-entry__input-label" for="pledge-amount-bamboo">£</label>
-										<input type="number" min="0" id="pledge-amount-bamboo" placeholder="25"></imput>
-									</div>
-									<button class="button button--narrow">Continue</button>
-							</form>
+								<span class="text text--bold">101</span><span> left</span>
 							</div>
 						</div>
 					</div>
+					<div class="modal-pledge-card-entry">
+						<p>Enter your pledge</p>
+						<form class="modal-pledge__form" name="bamboo-stand">
+							<div class="modal-pledge-card-entry__input-cluster">
+								<div class="modal-pledge-card-entry__input">
+									<label class="modal-pledge-card-entry__input-label" for="pledge-amount-bamboo">$</label>
+									<input type="number" min="0" id="pledge-amount-bamboo" name="value"></imput>
+								</div>
+								<button class="button button--narrow pledge__submit-button" type="submit">Continue</button>
+						</form>
+						</div>
+					</div>
 				</div>
+				<div class="pledge-card modal-pledge-card">
+					<div class="pledge-card__container modal-pledge-card__container">
+						<div class="modal-pledge-card__select">
+							<input type="radio" id="pledge-black-edition-stand" name="pledges" />
+							<label class="modal-pledge-card__select-label" for="pledge-black-edition-stand">
+								<h3>Black Edition Stand</h3>
+								<div class="highlighted-text">Pledge $25 or more</div>
+							</label>
+							<div class="modal-pledge-card__check"></div>
+						</div>
+						<p class="pledge-card__paragraph">
+							You get an ergonomic stand made of natural bamboo. You've helped
+							us launch our promotional campaign, and you’ll be added to a
+							special Backer member list.
+						</p>
+						<div class="pledge-card__price">
+							<div class="pledge-card__left">
+								<span class="text text--bold">101</span><span> left</span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-pledge-card-entry">
+						<p>Enter your pledge</p>
+						<form class="modal-pledge__form" name="bamboo-stand">
+							<div class="modal-pledge-card-entry__input-cluster">
+								<div class="modal-pledge-card-entry__input">
+									<label class="modal-pledge-card-entry__input-label" for="pledge-amount-bamboo">$</label>
+									<input type="number" min="0" id="pledge-amount-bamboo" name="value"></imput>
+								</div>
+								<button class="button button--narrow pledge__submit-button" type="submit">Continue</button>
+						</form>
+						</div>
+					</div>
 				</div>
+			</section>
+			<section class="section modal__thanks container">
+				<div class="modal__check">
+					<img src="./images/icon-check.svg" alt="">
+				</div>
+				<div class="text modal__thanks-heading">Thanks for your support!</div>
+				<p>Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get an email once our campaign is completed.</p>
+				<button class="button" id="modal-thanks-button">Got it!</button>
+			</section>
 			</div>
 		</div>
 	</body>
