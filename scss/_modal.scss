@@ -172,6 +172,12 @@
 	transition: max-height 0.2s ease-in, padding-top 0.2s ease-in,
 		padding-bottom 0.2s ease-in;
 
+	&:focus-within {
+		border-top: 1px solid $darkGrey;
+		max-height: 150px;
+		padding: $card-padding;
+	}
+
 	&--open {
 		border-top: 1px solid $darkGrey;
 		max-height: 150px;
