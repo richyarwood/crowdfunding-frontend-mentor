@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const hamburger = document.querySelector(".navigation__hamburger");
+	const contentWrapper = document.querySelector(".content-wrapper");
 	const navigationItems = document.querySelector(".navigation__items");
 	const backProjectButton = document.getElementById("back-project-button");
 	const modalBackground = document.querySelector(".overlay");
@@ -20,8 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	const pledgeSelects = Array.from(
 		document.querySelectorAll(".modal-pledge-card__select input[type=radio]")
 	);
+	const pledgeSelectLabels = Array.from(
+		document.querySelectorAll(".modal-pledge-card__select-label")
+	);
 	const pledgeSubmitButtons = Array.from(
 		document.querySelectorAll(".pledge__submit-button")
+	);
+	const pledgeSelectInputs = Array.from(
+		document.querySelectorAll("input[type='radio']")
 	);
 	const pledgeTotal = document.getElementById("pledge-total");
 	let pledgeAmount = 0;
@@ -37,6 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		modal.classList.add("modal__wrapper--show");
 		modalBackground.classList.add("overlay--show");
 		modalPledgeSection.classList.remove("modal__pledge-section--hide");
+		contentWrapper.setAttribute("tabindex", -1);
+		contentWrapper.setAttribute("aria-hidden", "true");
+		modalPledgeSection.setAttribute("tabindex", 0);
+		modalPledgeSection.focus();
 	};
 
 	const resetRewards = () => {
@@ -49,22 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		);
 	};
 
-	const openSelectedReward = (evt, items) => {
+	const openSelectedReward = (index) => {
 		resetRewards();
-		console.log(evt.target.id, "TARGET");
-		console.log(items);
 
-		const pledgeIndex = items.findIndex((item) => {
-			console.log(evt.target.id, "TARGET");
-			console.log(item.id, "ITEM");
-			return item.id === evt.target.id;
-		});
-
-		console.log(entrySections[pledgeIndex]);
-
-		entrySections[pledgeIndex].classList.add("modal-pledge-card-entry--open");
-		modalPledgeCards[pledgeIndex].classList.add("modal-pledge-card--open");
-		entrySections[pledgeIndex].scrollIntoView({
+		entrySections[index].classList.add("modal-pledge-card-entry--open");
+		modalPledgeCards[index].classList.add("modal-pledge-card--open");
+		entrySections[index].scrollIntoView({
 			behavior: "smooth",
 			block: "end",
 			inline: "nearest",
@@ -121,22 +122,42 @@ document.addEventListener("DOMContentLoaded", () => {
 		closeModal();
 	};
 
-	hamburger.addEventListener("click", () =>
-		navigationItems.classList.toggle("navigation__items--active")
-	);
+	hamburger.addEventListener("click", () => {
+		navigationItems.classList.toggle("navigation__items--active");
+		let expanded = hamburger.getAttribute("aria-expanded") === "true" || false;
+		hamburger.setAttribute("aria-expanded", !expanded);
+	});
+
 	backProjectButton.addEventListener("click", openModal);
+
 	modalCloseButton.addEventListener("click", closeModal);
-	pledgeSelects.forEach((item) =>
-		item.addEventListener("click", (e) => openSelectedReward(e, pledgeSelects))
-	);
-	selectRewards.forEach((item) => {
-		item.addEventListener("click", (e) => {
+
+	selectRewards.forEach((item, index) => {
+		item.addEventListener("click", () => {
+			console.log(index);
 			openModal();
-			openSelectedReward(e, selectRewards);
+			openSelectedReward(index);
 		});
 	});
+
+	pledgeSelects.forEach((item, index) => {
+		item.addEventListener("click", () => {
+			openSelectedReward(item[index]);
+		});
+	});
+
+	pledgeSelectLabels.forEach((label, index) => {
+		label.addEventListener("keydown", (e) => {
+			if (e.keyCode === 13) {
+				pledgeSelectInputs[index].checked = true;
+				openSelectedReward(index);
+			}
+		});
+	});
+
 	pledgeSubmitButtons.forEach((button) =>
 		button.addEventListener("click", (evt) => submitPledge(evt))
 	);
+
 	modalThanksButton.addEventListener("click", () => closeThanksModal());
 });
