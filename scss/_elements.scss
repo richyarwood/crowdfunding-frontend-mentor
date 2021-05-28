@@ -83,10 +83,12 @@
 .button {
 	background-color: $lightCyan;
 	color: #fff;
-	padding: 18px 30px;
 	border-radius: $border-radius--large;
 	border: 0;
+	cursor: pointer;
 	font-size: 1.5rem;
+	font-weight: 700;
+	padding: 18px 30px;
 	width: max-content;
 	margin-top: 2rem;
 
@@ -101,6 +103,10 @@
 	&--narrow {
 		margin: 0;
 		padding: 10px 20px;
+	}
+
+	&--no-margin {
+		margin: 0;
 	}
 }
 
@@ -136,6 +142,60 @@
 	margin-top: -6rem;
 }
 
+.bookmark {
+	height: 56px;
+	width: 56px;
+	position: relative;
+
+	&__text {
+		display: none;
+	}
+
+	&__icon {
+		display: block;
+	}
+
+	&__icon,
+	&__icon--active {
+		height: 100%;
+	}
+
+	&__icon--active {
+		display: none;
+	}
+
+	&:hover {
+		color: $darkCyan;
+
+		.bookmark__icon {
+			display: none;
+		}
+
+		.bookmark__icon--active {
+			display: block;
+		}
+	}
+
+	&__input {
+		position: absolute;
+		visibility: hidden;
+
+		&:checked ~ {
+			.bookmark {
+				color: $darkCyan;
+			}
+
+			label .bookmark__icon {
+				display: none;
+			}
+
+			label .bookmark__icon--active {
+				display: block;
+			}
+		}
+	}
+}
+
 @include tablet-up {
 	.header {
 		background-image: url("../images/image-hero-desktop.jpg");
@@ -145,10 +205,6 @@
 
 	.container {
 		max-width: 700px;
-	}
-
-	button {
-		margin-top: 0;
 	}
 
 	.section {
@@ -173,6 +229,30 @@
 			border-left: 2px solid $lightGrey;
 			padding: 0;
 			padding-left: 60px;
+		}
+	}
+
+	.bookmark {
+		height: 56px;
+		width: 165px;
+		position: relative;
+		text-align: right;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 1.8rem 2rem;
+		border-radius: 50px;
+		background-color: $lightGrey;
+		color: $darkGrey;
+
+		&__text {
+			display: block;
+		}
+
+		&__icon,
+		&__icon--active {
+			position: absolute;
+			left: 0;
 		}
 	}
 }

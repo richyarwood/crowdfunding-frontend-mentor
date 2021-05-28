@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+	let pledgeAmount = 5000;
+	const pledgeTarget = 100000;
+	let backers = 150;
+
 	const hamburger = document.querySelector(".navigation__hamburger");
 	const contentWrapper = document.querySelector(".content-wrapper");
 	const navigationItems = document.querySelector(".navigation__items");
@@ -27,18 +31,27 @@ document.addEventListener("DOMContentLoaded", () => {
 	const pledgeSubmitButtons = Array.from(
 		document.querySelectorAll(".pledge__submit-button")
 	);
+
 	const pledgeSelectInputs = Array.from(
 		document.querySelectorAll("input[type='radio']")
 	);
 	const pledgeTotal = document.getElementById("pledge-total");
-	let pledgeAmount = 0;
-	const pledgeTarget = 10000;
 	document.getElementById("pledge-target-amount").innerHTML = pledgeTarget
 		.toFixed(0)
 		.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
-	let backers = 0;
+	pledgeTotal.innerHTML = pledgeAmount
+		.toFixed(0)
+		.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
 	const backersTotal = document.getElementById("backers-total");
+	backersTotal.innerHTML = backers;
+
+	const pledgeTracker = document.querySelector(".progress-bar-inner");
+	pledgeTracker.setAttribute(
+		"style",
+		`width: ${(pledgeAmount / pledgeTarget) * 100}%`
+	);
 
 	const openModal = () => {
 		modal.classList.add("modal__wrapper--show");
@@ -80,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	const setPledgeAmount = (amount) => {
-		const pledgeTracker = document.querySelector(".progress-bar-inner");
 		pledgeAmount += amount;
 		pledgeTotal.innerHTML = pledgeAmount
 			.toFixed(0)
@@ -96,6 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		evt.preventDefault();
 		const form = evt.target.closest("form");
 		const formDataValue = parseInt(new FormData(form).get("value"));
+
+		console.log(formDataValue);
 
 		if (!formDataValue) return;
 
@@ -134,15 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	selectRewards.forEach((item, index) => {
 		item.addEventListener("click", () => {
-			console.log(index);
+			resetRewards();
 			openModal();
-			openSelectedReward(index);
+			openSelectedReward(index + 1);
 		});
 	});
 
 	pledgeSelects.forEach((item, index) => {
 		item.addEventListener("click", () => {
-			openSelectedReward(item[index]);
+			openSelectedReward(index);
 		});
 	});
 

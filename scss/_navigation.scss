@@ -14,7 +14,7 @@
 		right: 0;
 		top: 60px;
 		transform: translateY(-500px);
-		transition: ease-in-out transform 0.4s;
+		transition: ease transform 0.2s;
 		width: 90%;
 		z-index: 300;
 	}
@@ -61,6 +61,7 @@
 			box-shadow: none;
 			position: static;
 			transform: translateY(0);
+			transition: unset;
 			width: auto;
 		}
 
