@@ -2,7 +2,7 @@
 
 ## Project from [Frontend Mentor](https://www.frontendmentor.io/)
 
-### Finished project here: [Crowdfunding: Frontend Mentor](https://crowdfunding-frontend-mentor-2cs8g328q-richyarwood.vercel.app/)
+### Finished project here: [Crowdfunding: Frontend Mentor](https://crowdfunding-frontend-mentor.vercel.app)
 
 This [Crowdfunding](https://www.frontendmentor.io/challenges/crowdfunding-product-page-7uvcZe7ZR) challenge had the following key requirements:
 
